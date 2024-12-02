@@ -8,16 +8,12 @@ main = do
     print $ numSafeDampened parsed
 
 parseReports :: String -> [[Int]]
-parseReports contents = map (map read . words) (lines contents)
+parseReports = map (map read . words) . lines
 
 isSafe :: (Num a, Ord a) => [a] -> Bool
-isSafe [] = True
-isSafe [_] = True
 isSafe xs = isDecreasingByNum xs || isIncreasingByNum xs
 
 isSafeDampened :: (Num a, Ord a) => [a] -> Bool
-isSafeDampened [] = True
-isSafeDampened [_] = True
 isSafeDampened xs = isSafe xs || any isSafe (combinations (length xs - 1) xs)
 
 isIncreasingByNum :: (Num a, Ord a) => [a] -> Bool
@@ -33,9 +29,6 @@ isDecreasingByNum all@(x : y : xs) = x > y && abs (x - y) <= 3 && isDecreasingBy
 numSafe :: [[Int]] -> Int
 numSafe = length . filter isSafe
 
-numSafeDebug :: [[Int]] -> [Bool]
-numSafeDebug = map isSafe
-
 numSafeDampened :: [[Int]] -> Int
 numSafeDampened = length . filter isSafeDampened
 
@@ -45,4 +38,4 @@ safePredicate GT x y = x > y && abs (x-y) <= 3
 safePredicate LT x y = x < y && abs (x-y) <= 3
 
 combinations :: Int -> [a] -> [[a]]
-combinations k ns = filter ((k==).length) $ subsequences ns
+combinations k = filter ((k==).length) . subsequences
