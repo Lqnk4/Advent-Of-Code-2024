@@ -1,4 +1,3 @@
-import Data.Char
 import Data.List (sort, elemIndices, genericLength)
 
 main :: IO ()
@@ -10,8 +9,7 @@ main = do
 
 
 parseNums :: String -> [Int]
-parseNums string = let stringNums = concatMap words $ lines string
-                    in map read stringNums
+parseNums = map read . concatMap words . lines
 
 
 listDiffSum :: (Num a, Ord a) => [a] -> [a] -> a
