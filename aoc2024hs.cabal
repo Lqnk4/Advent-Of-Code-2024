@@ -14,7 +14,8 @@ extra-doc-files:    CHANGELOG.md
 
 common config
     ghc-options: -Wall
-    build-depends:    base ^>=4.17.2.1
+    build-depends:    
+        base ^>=4.17.2.1
 
 library
     import: config
@@ -22,6 +23,10 @@ library
     exposed-modules:
         Y2024.Day01
         Y2024.Day02
+        Y2024.Day03
+    build-depends:
+        regex-tdfa ^>= 1.3.2
+
 
 executable aoc2024hs
     import:           config
