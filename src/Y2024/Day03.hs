@@ -5,6 +5,7 @@ import Text.Regex.TDFA (AllTextMatches (getAllTextMatches), (=~))
 main :: IO ()
 main = do
     contents <- readFile "data/Y2024/Day03/input.txt"
+    print $ part1 contents
     print $ part2 contents
 
 applyRegex :: String -> [String]
@@ -22,5 +23,6 @@ part2 = sum . map (uncurry (*) . read . filter (`notElem` ['a' .. 'z'])) . follo
 followsDo :: [String] -> [String]
 followsDo [] = []
 followsDo (x : xs)
-    | x == "don't()" = followsDo . drop 1 . dropWhile (/= "do()") $ xs
+    | x == "don't()" = followsDo . dropWhile (/= "do()") $ xs
+    | x == "do()" = followsDo xs
     | otherwise = x : followsDo xs
