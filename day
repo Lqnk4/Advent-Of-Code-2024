@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+YEAR=2024
+INTERACTIVE=false
+SRC_DIR="src/Y${YEAR}"
+
+
+while getopts "r:i:c:" flag; do
+    case $flag in
+    r)
+        echo "Running main function non-interactively"
+        runhaskell ${SRC_DIR}/Day${OPTARG}
+        ;;
+    i)
+        echo "Running interactively"
+        ghci ${SRC_DIR}/Day${OPTARG}
+        ;;
+    c)
+        echo "Creating Day${OPTARG} From Template"
+        echo "TODO: Implement this"
+        ;;
+    \?)
+        echo "Invalid option: -$OPTARG" >&2
+        exit 1
+        ;;
+    esac
+done
