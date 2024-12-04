@@ -14,11 +14,11 @@ applyRegex input = getAllTextMatches (input =~ "mul\\([0-9]+,[0-9]+\\)") :: [Str
 part1 :: String -> Int
 part1 = sum . map (uncurry (*) . read . filter (`notElem` ['a' .. 'z'])) . applyRegex
 
-applyRegex2 :: String -> [String]
-applyRegex2 input = getAllTextMatches (input =~ "mul\\([0-9]+,[0-9]+\\)|do\\(\\)|don't\\(\\)") :: [String]
-
 part2 :: String -> Int
 part2 = sum . map (uncurry (*) . read . filter (`notElem` ['a' .. 'z'])) . followsDo . applyRegex2
+
+applyRegex2 :: String -> [String]
+applyRegex2 input = getAllTextMatches (input =~ "mul\\([0-9]+,[0-9]+\\)|do\\(\\)|don't\\(\\)") :: [String]
 
 followsDo :: [String] -> [String]
 followsDo [] = []

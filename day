@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
+# TODO: Make this not scuffed.
+
 YEAR=2024
 INTERACTIVE=false
 SRC_DIR="src/Y${YEAR}"
 DATA_DIR="data/Y${YEAR}"
 
 start_ghci() {
-    ghci ${SRC_DIR}/Day${1}
+    cabal repl --repl-no-load
     exit 0
 }
 
@@ -26,9 +28,10 @@ create_files() {
         touch ${data_path}/sample.txt
         touch ${data_path}/input.txt
     fi
+    exit 0;
 }
 
-while getopts "r:i:c:" flag; do
+while getopts "r:ic:" flag; do
     case $flag in
     r)
         echo "Running Day{OPTARG}.hs main function non-interactively"
