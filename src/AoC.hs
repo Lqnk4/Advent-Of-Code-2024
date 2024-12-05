@@ -24,3 +24,11 @@ antiDiagonals = diagonals . rotate90
 -- get all subarrays of size n
 subArrays :: Int -> [[a]] -> [[[a]]]
 subArrays n xss = [[take n t | t <- tails xs] | xs <- xss]
+
+-- middle elements of list
+middle :: [a] -> [a]
+middle = m =<< drop 1
+  where
+    m [] = take 1
+    m [_] = take 2
+    m (_ : _ : ys) = m ys . drop 1

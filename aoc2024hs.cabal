@@ -26,8 +26,10 @@ library
         Y2024.Day02
         Y2024.Day03
         Y2024.Day04
+        Y2024.Day05
     build-depends:
         regex-tdfa ^>= 1.3.2
+    default-extensions: TupleSections
 
 
 executable aoc2024hs

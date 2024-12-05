@@ -9,12 +9,9 @@ main = do
     print $ part1 contents
     print $ part2 contents
 
-countXMAS :: String -> Int
-countXMAS [] = 0
-countXMAS (x : xs) = if (x == 'X' && length xs >= 3 && take 3 xs == "MAS") || (x == 'S' && length xs >= 3 && take 3 xs == "AMX") then 1 + countXMAS xs else countXMAS xs
 
-countXMAS2 :: String -> Int
-countXMAS2 = length . filter ((||) <$> isPrefixOf "XMAS" <*> isPrefixOf "SAMX") . tails
+countXMAS :: String -> Int
+countXMAS = length . filter ((||) <$> isPrefixOf "XMAS" <*> isPrefixOf "SAMX") . tails
 
 part1 :: [Char] -> Int
 part1 input = countForward grid + countDown grid + countDiagonals grid
