@@ -20,13 +20,14 @@ run_main() {
 create_files() {
 
     local data_path="${DATA_DIR}/Day${1}"
-    local src_path="${SRC_DIR}/Day{1}.hs"
+    local src_path="${SRC_DIR}/Day${1}.hs"
 
     # create input files
     mkdir -p $data_path
     if [ ! -f ${data_path}/sample.txt ] && [ ! -f ${data_path}/input.txt ]; then
         touch ${data_path}/sample.txt
         touch ${data_path}/input.txt
+        # touch ${src_path}
     fi
     exit 0;
 }

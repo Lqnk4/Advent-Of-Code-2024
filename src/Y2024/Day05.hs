@@ -1,15 +1,14 @@
 module Y2024.Day05 where
 
+import qualified AoC (middle)
 import Data.List (partition, sortBy)
 import Data.Tuple (swap)
 
-import qualified AoC (middle)
-
 main :: IO ()
 main = do
-    raw <- lines <$> readFile "data/Y2024/Day05/input.txt"
-    putStr "Part 1: " >> print (part1 raw)
-    putStr "Part 2: " >> print (part2 raw)
+  raw <- lines <$> readFile "data/Y2024/Day05/input.txt"
+  putStr "Part 1: " >> print (part1 raw)
+  putStr "Part 2: " >> print (part2 raw)
 
 parseOrderRule :: String -> (Int, Int)
 parseOrderRule [] = (-1, -1)
@@ -27,7 +26,7 @@ updatesList = map parseUpdate . drop 1 . dropWhile (/= "")
 -- ordered pairs prioritizing the elements with lowest index
 pairs :: [a] -> [(a, a)]
 pairs [] = []
-pairs (x : xs) = map (\y -> (x, y)) xs ++ pairs xs
+pairs (x : xs) = map (x,) xs ++ pairs xs
 
 part1 :: [String] -> Int
 part1 raw = sum . map (head . AoC.middle) . filter isValid . updatesList $ raw
@@ -46,7 +45,7 @@ part2 raw = sum . map (head . AoC.middle) $ fixed
     (_, invalid) = partition isValid updates
     cmp :: Int -> Int -> Ordering
     cmp x y
-        | (x, y) `elem` rules = LT
-        | (y, x) `elem` rules = GT
+      | (x, y) `elem` rules = LT
+      | (y, x) `elem` rules = GT
     cmp _ _ = EQ
     fixed = map (sortBy cmp) invalid
