@@ -14,7 +14,7 @@ parseInput = map (\xs -> (target xs, nums xs))
     nums = map read . drop 1 . words
 
 part1 :: [(Int, [Int])] -> Int
-part1 tasks = sum $ map loop tasks
+part1 = sum . map loop
   where
     loop :: (Int, [Int]) -> Int
     loop (_, []) = 0
@@ -25,7 +25,7 @@ part1 tasks = sum $ map loop tasks
       | otherwise = 0
 
 part2 :: [(Int, [Int])] -> Int
-part2 tasks = sum $ map loop tasks
+part2 = sum . map loop
   where
     loop :: (Int, [Int]) -> Int
     loop (_, []) = 0
